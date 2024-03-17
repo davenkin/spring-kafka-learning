@@ -15,12 +15,19 @@
 4. Run test cases under `test/java` directly in IDE
 
 # Local Kafka setup
-Before running any test case, a local Kafka environment must be set up. Currently, we are using Kafka with Zookeeper.
-- To start `confluentinc/kafka`, go to `docker` folder and run `docker compose -f docker-compose-confluentinc.yml up`.
-- To shut down `confluentinc/kafka`, go to `docker` folder and run `docker compose -f docker-compose-confluentinc.yml down`
-- To start `bitnami/kafka`, go to `docker` folder and run `docker compose -f docker-compose-bitnami.yml up`.
-- To shut down `bitnami/kafka`, go to `docker` folder and run `docker compose -f docker-compose-bitnami.yml down`.
+Before running any test case, a local Kafka environment must be set up. Currently, we are using Kafka with Zookeeper, and we provide both `confluentinc/kafka` and `bitnami/kafka`.
 
+### confluentinc/kafka
+- Go to `docker` folder and run `docker compose -f docker-compose-confluentinc.yml up`.
+- Kafka cluster will be available at `localhost:9092`
+- You can open Kafka UI at `http://localhost:8080`
+- Run `docker compose -f docker-compose-confluentinc.yml down`.
+
+### bitnami/kafka
+- Go to `docker` folder and run `docker compose -f docker-compose-bitnami.yml up`.
+- Kafka cluster will be available at `localhost:9092`
+- You can open Kafka UI at `http://localhost:8080`
+- Run `docker compose -f docker-compose-bitnami.yml down`.
 
 # Other commands
 3. Run `./run.sh` to start the application with remote debug port 5005, then you can  visit `http://localhost:8080/about`
