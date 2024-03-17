@@ -1,0 +1,14 @@
+target
+.idea/
+/tmp/
+*.iml
+*.ipr
+*.iws
+build
+out
+.gradle
+*.log
+.shelf
+*.retry
+.ideaDataSources
+.DS_Store

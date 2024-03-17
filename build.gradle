@@ -1,0 +1,91 @@
+buildscript {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'application'
+    id "org.springframework.boot" version "3.0.0"
+}
+
+repositories {
+    maven { url "https://maven.aliyun.com/repository/central" }
+}
+
+wrapper {
+    gradleVersion = '7.6'
+}
+
+application {
+    mainClass = "davenkin.MainApplication"
+    applicationDefaultJvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"]
+}
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+configurations.all {
+    exclude group: "junit", module: "junit"
+    exclude group: "org.assertj", module: "assertj-core"
+    exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
+bootJar {
+    launchScript()
+}
+
+dependencies {
+    configurations {
+        parentBom
+        runtimeOnly.extendsFrom(parentBom)
+        compileOnly.extendsFrom(parentBom)
+        annotationProcessor.extendsFrom(parentBom)
+        implementation.extendsFrom(parentBom)
+    }
+
+    parentBom platform('org.springframework.boot:spring-boot-dependencies:3.0.0')
+
+    //spring
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-starter-aop')
+
+    //jackson
+    implementation('com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.1')
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.14.1')
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1')
+    implementation('com.fasterxml.jackson.core:jackson-core:2.14.1')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.14.1')
+    implementation('com.fasterxml.jackson.core:jackson-annotations:2.14.1')
+
+
+    //others
+    implementation('io.jsonwebtoken:jjwt:0.9.1')
+    implementation('com.google.guava:guava:31.1-jre')
+    implementation('commons-io:commons-io:2.11.0')
+    implementation('org.apache.commons:commons-lang3')
+    implementation('org.apache.commons:commons-collections4:4.4')
+    implementation('cn.hutool:hutool-all:5.8.14')
+    implementation('com.alibaba.fastjson2:fastjson2:2.0.38')
+    implementation('org.apache.kafka:kafka-clients:3.7.0')
+
+    //test
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation('org.junit.jupiter:junit-jupiter-params')
+    testImplementation('org.junit.jupiter:junit-jupiter-engine')
+    testImplementation('org.mockito:mockito-core:4.9.0')
+    testImplementation('org.mockito:mockito-junit-jupiter:4.9.0')
+    testImplementation('com.apifan.common:common-random:1.0.18')
+    testImplementation('org.apache.commons:commons-pool2:2.11.1')
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
