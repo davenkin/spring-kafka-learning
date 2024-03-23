@@ -31,4 +31,4 @@ Before running any test case, a local Kafka environment must be set up. Currentl
 
 # Other commands
 3. Run `./run.sh` to start the application with remote debug port 5005, then you can  visit `http://localhost:8080/about`
-4. Run `./build.sh` to build the project
+4. Run `./local-build.sh` to build the project
