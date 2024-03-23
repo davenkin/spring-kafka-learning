@@ -12,5 +12,4 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor(access = PRIVATE)
 public class QAboutInfo {
     private final String deployTime;
-    private final String environment;
 }

@@ -21,17 +21,14 @@ import static java.time.ZonedDateTime.now;
 @RequestMapping(value = "/about")
 public class AboutController {
     private final ZonedDateTime deployTime = now();
-    private final Environment environment;
 
     @GetMapping
     public QAboutInfo about() {
-        String environment = this.environment.getActiveProfiles()[0];
         String deployTime = this.deployTime.toString();
         log.info("Accessed about controller.");
 
         return QAboutInfo.builder()
                 .deployTime(deployTime)
-                .environment(environment)
                 .build();
     }
 
