@@ -91,13 +91,17 @@ public class VanillaKafkaTest {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "consume_message_with_minimum_configuration1");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "consume_message_with_minimum_configuration");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 
         consumer.subscribe(List.of("test-topic"));
         int count = 0;
         while (count < 10) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            if (count == 0) {
+                Thread.sleep(5000);//Wait for rebalance to complete for the first time
+            }
+
             for (ConsumerRecord<String, String> record : records) {
                 log.info("=====Consumed message with topic[{}],partition[{}],offset[{}]", record.topic(), record.partition(), record.offset());
             }
