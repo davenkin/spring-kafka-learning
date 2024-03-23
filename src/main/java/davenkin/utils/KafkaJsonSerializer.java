@@ -1,16 +1,15 @@
-package davenkin.user;
+package davenkin.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import davenkin.utils.DefaultObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
-public class UserSerializer implements Serializer<User> {
+public class KafkaJsonSerializer<T> implements Serializer<T> {
 
     private final ObjectMapper objectMapper = new DefaultObjectMapper();
 
     @Override
-    public byte[] serialize(String topic, User data) {
+    public byte[] serialize(String topic, T data) {
         try {
             return objectMapper.writeValueAsBytes(data);
         } catch (Exception e) {

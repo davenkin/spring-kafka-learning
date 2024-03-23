@@ -1,7 +1,7 @@
 package davenkin;
 
 import davenkin.user.User;
-import davenkin.user.UserSerializer;
+import davenkin.utils.KafkaJsonSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.*;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class VanillaKafkaTest {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, UserSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaJsonSerializer.class);
 
         Producer<String, User> producer = new KafkaProducer<>(props);
         producer.send(new ProducerRecord<>("produce_json_form_object", new User("123", "Mike")));
