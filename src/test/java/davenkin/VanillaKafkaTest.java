@@ -68,7 +68,7 @@ public class VanillaKafkaTest {
 
         Producer<String, String> producer = new KafkaProducer<>(props);
 
-        producer.send(new ProducerRecord<>("send_synchronously", "Hello"),
+        producer.send(new ProducerRecord<>("send_asynchronously", "Hello"),
                 (metadata, exception) -> log.info("Send message with offset[{}] and partition[{}].", metadata.offset(), metadata.partition()));
         producer.flush();
         producer.close();
