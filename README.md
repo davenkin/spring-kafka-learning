@@ -20,13 +20,13 @@ Before running any test case, a local Kafka environment must be set up. Currentl
 ### confluentinc/kafka
 - Go to `docker` folder and run `docker compose -f docker-compose-confluentinc.yml up`.
 - Kafka cluster will be available at `localhost:9092`
-- You can open Kafka UI at `http://localhost:8080`
+- You can open Kafka UI at `http://localhost:8070`
 - Run `docker compose -f docker-compose-confluentinc.yml down`.
 
 ### bitnami/kafka
 - Go to `docker` folder and run `docker compose -f docker-compose-bitnami.yml up`.
 - Kafka cluster will be available at `localhost:9092`
-- You can open Kafka UI at `http://localhost:8080`
+- You can open Kafka UI at `http://localhost:8070`
 - Run `docker compose -f docker-compose-bitnami.yml down`.
 
 # Other commands
