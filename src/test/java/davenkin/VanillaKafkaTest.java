@@ -1,5 +1,6 @@
 package davenkin;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Properties;
 import java.util.stream.IntStream;
 
+@Slf4j
 public class VanillaKafkaTest {
     @Test
     public void produce_message_with_minimum_configuration() {
